@@ -1,11 +1,18 @@
 package com.bridgelabz.addressbookStreamAPI;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class AddressBookMain {
 
+	List<Contact> listContact = new ArrayList<Contact>();
+
 	public static void main(String[] args) {
+
+		Map<String, List<Contact>> cityMap = new LinkedHashMap<>();
 		AddressBook addressBook = new AddressBook();
 		List<Contact> listContact = new ArrayList<Contact>();
 
@@ -19,7 +26,14 @@ public class AddressBookMain {
 		listContact.add(contact2);
 		listContact.add(contact3);
 
+		List<Contact> collect = listContact.stream().filter(p -> p.getFirstName().equalsIgnoreCase(firstName))
+				.collect(Collectors.toList());
+		for (Contact contact4 : collect) {
+			System.out.println("Search result: " + contact);
+		}
+
 		System.out.println(addressBook.listContact);
+
 	}
 
 }
