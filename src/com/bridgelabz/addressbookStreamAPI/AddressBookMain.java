@@ -48,7 +48,7 @@ public class AddressBookMain {
             System.out.println("Address book with this name exists, Enter new name.");
         } else {
             addressBookMap.put(bookName, addressBook);
-            System.out.println("press 1 if you want to add another book or press any key to exit.");
+            System.out.println("If you want to add another book or press any key to exit.");
             int newBook = scanner.nextInt();
             if (newBook == 1) {
             }
