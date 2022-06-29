@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class AddressBook {
 	
-	private final Map<String, List<Contact>> map = new LinkedHashMap<>();
     private final Map<String, List<Contact>> cityMap = new LinkedHashMap<>();
 	List<Contact> listContact = new ArrayList<Contact>();
 
