@@ -12,17 +12,16 @@ public class AddressBookMain {
 
 	public static void main(String[] args) {
 
-		Map<String, List<Contact>> cityMap = new LinkedHashMap<>();
-		Map<String, AddressBook> addressBookMap = new HashMap<>();
-		AddressBook addressBook = new AddressBook();
+		//Map<String, List<Contact>> cityMap = new LinkedHashMap<>();
 		List<Contact> listContact = new ArrayList<Contact>();
 
+		AddressBook addressBook1 = new AddressBook();
 		Contact contact = new Contact("Faisal", "Ahmad", "Mumbai", "6655443322");
 		Contact contact1 = new Contact("Rahul", "Kumar", "Pune", "8855443322");
 		Contact contact2 = new Contact("Karan", "Rao", "Lucknow", "6655443355");
 		Contact contact3 = new Contact("Aman", "Yadav", "Delhi", "1255443389");
 
-		AddressBook addressBook1 = new AddressBook();
+		AddressBook addressBook2 = new AddressBook();
 		Contact contact5 = new Contact("Arun", "Kishor", "Delhi", "1255443389");
 		Contact contact6 = new Contact("Karan", "Yadav", "Delhi", "1255443389");
 
@@ -31,22 +30,29 @@ public class AddressBookMain {
 //		listContact.add(contact2);
 //		listContact.add(contact3);
 
-		addressBook.listContact.add(contact);
-		addressBook.listContact.add(contact1);
-		addressBook.listContact.add(contact2);
-		addressBook.listContact.add(contact3);
-
+		addressBook1.listContact.add(contact);
+		addressBook1.listContact.add(contact1);
 		addressBook1.listContact.add(contact2);
 		addressBook1.listContact.add(contact3);
 
-		List<Contact> collect = listContact.stream().filter(firstName).equalsIgnoreCase(firstName)
-				.collect(Collectors.toList());
-		for (Contact contact4 : collect) {
-			System.out.println("Search result: " + contact);
+		addressBook2.listContact.add(contact5);
+		addressBook2.listContact.add(contact6);
+		
+		Map<String, AddressBook> addressBookMap = new LinkedHashMap<>();
+		addressBookMap.put("addressBook1", addressBook1);
+		addressBookMap.put("addressBook2", addressBook2);
+		
+		List<Contact> listContact1 = new ArrayList<Contact>();
+		for(Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {
+			AddressBook addBook = addressBookMap.get(entry.getKey());
+			List<Contact> nameListContact = addBook.listContact.stream().filter(x -> x.firstName.equals("Arun"))
+					.collect(Collectors.toList());
+			List<Contact> nameListContact1 = addBook.listContact.stream().filter(x -> x.firstName.equals("Faisal"))
+					.collect(Collectors.toList());
+			listContact1.addAll(nameListContact);
+			listContact1.addAll(nameListContact1);
 		}
-
-		System.out.println(addressBook.listContact);
-
+		System.out.println("Searched name details are: " + listContact1);
 	}
 
 }
