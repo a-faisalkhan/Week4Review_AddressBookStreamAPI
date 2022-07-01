@@ -6,6 +6,15 @@ public class Contact {
 	String lastName;
 	String city;
 	String mobileNumber;
+	
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
 
 	public Contact(String firstName, String lastName, String city, String mobileNumber) {
 		super();

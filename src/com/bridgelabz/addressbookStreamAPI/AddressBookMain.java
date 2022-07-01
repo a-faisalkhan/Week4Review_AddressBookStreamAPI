@@ -42,17 +42,33 @@ public class AddressBookMain {
 		addressBookMap.put("addressBook1", addressBook1);
 		addressBookMap.put("addressBook2", addressBook2);
 		
-		List<Contact> listContact1 = new ArrayList<Contact>();
+		// Searching details by using firstName
+//		List<Contact> listContact1 = new ArrayList<Contact>();
+//		for(Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {
+//			AddressBook addBook = addressBookMap.get(entry.getKey());
+//			List<Contact> nameListContact1 = addBook.listContact.stream().filter(x -> x.firstName.equals("Arun"))
+//					.collect(Collectors.toList());
+//			listContact1.addAll(nameListContact1);
+//		}
+//		System.out.println("Searched name details are: " + listContact1);
+		
+		Map<String, List<Contact>> cityMap = new LinkedHashMap<>();
+		
 		for(Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {
-			AddressBook addBook = addressBookMap.get(entry.getKey());
-			List<Contact> nameListContact = addBook.listContact.stream().filter(x -> x.firstName.equals("Arun"))
-					.collect(Collectors.toList());
-			List<Contact> nameListContact1 = addBook.listContact.stream().filter(x -> x.firstName.equals("Faisal"))
-					.collect(Collectors.toList());
-			listContact1.addAll(nameListContact);
-			listContact1.addAll(nameListContact1);
+			
+			AddressBook addressBook = addressBookMap.get(entry.getKey());
+			addressBook.listContact.stream().forEach(element -> {
+				if(cityMap.containsKey(element.getCity())) {
+					List<Contact> list = cityMap.get(element.getCity());
+					list.add(element);
+				} else {
+					List<Contact> list = new ArrayList<>();
+					list.add(element);
+					cityMap.put(element.getCity(), list);
+				}
+			});
 		}
-		System.out.println("Searched name details are: " + listContact1);
+		System.out.println(cityMap);
 	}
 
 }
